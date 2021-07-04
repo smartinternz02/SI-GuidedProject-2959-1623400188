@@ -1,0 +1,368 @@
+[
+    {
+        "id": "7abebc45.efc5c4",
+        "type": "tab",
+        "label": "Flow 6",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "914c3a66.a19328",
+        "type": "ui_button",
+        "z": "7abebc45.efc5c4",
+        "name": "Valve ON",
+        "group": "b5864388.b381b",
+        "order": 12,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Valve ON",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "{\"command\":\"valveon\"}",
+        "payloadType": "json",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 120,
+        "y": 80,
+        "wires": [
+            [
+                "1f4d1e70.b2ba12",
+                "cf587583.793ba8"
+            ]
+        ]
+    },
+    {
+        "id": "d2b30999.52d3e8",
+        "type": "ui_button",
+        "z": "7abebc45.efc5c4",
+        "name": "Valve OFF",
+        "group": "b5864388.b381b",
+        "order": 14,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Valve OFF",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "{\"command\":\"valveoff\"}",
+        "payloadType": "json",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 130,
+        "y": 140,
+        "wires": [
+            [
+                "1f4d1e70.b2ba12",
+                "cf587583.793ba8"
+            ]
+        ]
+    },
+    {
+        "id": "cf587583.793ba8",
+        "type": "ibmiot out",
+        "z": "7abebc45.efc5c4",
+        "authentication": "apiKey",
+        "apiKey": "70ef840d.275b1c",
+        "outputType": "cmd",
+        "deviceId": "1001",
+        "deviceType": "iotdevice",
+        "eventCommandType": "home",
+        "format": "json",
+        "data": "data",
+        "qos": 0,
+        "name": "IBM IoT",
+        "service": "registered",
+        "x": 360,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "1f4d1e70.b2ba12",
+        "type": "debug",
+        "z": "7abebc45.efc5c4",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 370,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "cb8cb48d.4fbe08",
+        "type": "ibmiot in",
+        "z": "7abebc45.efc5c4",
+        "authentication": "apiKey",
+        "apiKey": "70ef840d.275b1c",
+        "inputType": "evt",
+        "logicalInterface": "",
+        "ruleId": "",
+        "deviceId": "1001",
+        "applicationId": "",
+        "deviceType": "iotdevice",
+        "eventType": "+",
+        "commandType": "",
+        "format": "json",
+        "name": "IBM IoT",
+        "service": "registered",
+        "allDevices": "",
+        "allApplications": "",
+        "allDeviceTypes": "",
+        "allLogicalInterfaces": "",
+        "allEvents": true,
+        "allCommands": "",
+        "allFormats": "",
+        "qos": 0,
+        "x": 70,
+        "y": 260,
+        "wires": [
+            [
+                "245dc155.1b2d9e",
+                "a825e6d3.940d28",
+                "8696926d.7996a",
+                "98ccf5a9.acb6d8"
+            ]
+        ]
+    },
+    {
+        "id": "245dc155.1b2d9e",
+        "type": "function",
+        "z": "7abebc45.efc5c4",
+        "name": "Flowrate1",
+        "func": "global.set('i',msg.payload.d.flowratei)\nreturn{payload:msg.payload.d.flowratei}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 240,
+        "y": 340,
+        "wires": [
+            [
+                "a825e6d3.940d28",
+                "54330719.fb1468",
+                "d2d75c88.87525"
+            ]
+        ]
+    },
+    {
+        "id": "a825e6d3.940d28",
+        "type": "debug",
+        "z": "7abebc45.efc5c4",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 430,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "ffb75d0f.91f6d",
+        "type": "switch",
+        "z": "7abebc45.efc5c4",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "neq",
+                "v": "o",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 550,
+        "y": 400,
+        "wires": [
+            [
+                "7df8faee.857634"
+            ]
+        ]
+    },
+    {
+        "id": "54330719.fb1468",
+        "type": "rbe",
+        "z": "7abebc45.efc5c4",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "payload",
+        "x": 410,
+        "y": 400,
+        "wires": [
+            [
+                "ffb75d0f.91f6d"
+            ]
+        ]
+    },
+    {
+        "id": "7df8faee.857634",
+        "type": "http request",
+        "z": "7abebc45.efc5c4",
+        "name": "",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "https://www.fast2sms.com/dev/bulkV2?authorization=l1TPQ0NXp3gWLa5UCSibcnrzw24VAE6fxRstvmqGuHdoBj7F8hjT5a8D0eW7h1KsIHQ9GYvXRuoABynf&message=The%20Water%20pipe%20is%20leaking&language=english&route=q&numbers=9000643449",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 590,
+        "y": 480,
+        "wires": [
+            [
+                "38a3b2b.815d64e"
+            ]
+        ]
+    },
+    {
+        "id": "38a3b2b.815d64e",
+        "type": "debug",
+        "z": "7abebc45.efc5c4",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 730,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "d2d75c88.87525",
+        "type": "ui_gauge",
+        "z": "7abebc45.efc5c4",
+        "name": "inlet",
+        "group": "b5864388.b381b",
+        "order": 13,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "inlet",
+        "label": "litre/min",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 410,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "8696926d.7996a",
+        "type": "function",
+        "z": "7abebc45.efc5c4",
+        "name": "Flowrate2",
+        "func": "global.set('o',msg.payload.d.flowrateo)\nreturn{payload:msg.payload.d.flowrateo}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 220,
+        "y": 400,
+        "wires": [
+            [
+                "9bdb45a9.a116d8"
+            ]
+        ]
+    },
+    {
+        "id": "9bdb45a9.a116d8",
+        "type": "ui_gauge",
+        "z": "7abebc45.efc5c4",
+        "name": "outlet",
+        "group": "b5864388.b381b",
+        "order": 15,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "outlet",
+        "label": "lit/min",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 390,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "98ccf5a9.acb6d8",
+        "type": "cloudant out",
+        "z": "7abebc45.efc5c4",
+        "name": "storage",
+        "cloudant": "",
+        "database": "project",
+        "service": "node-red-hggtz-2021--cloudant-1621062268661-18786",
+        "payonly": false,
+        "operation": "insert",
+        "x": 270,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "b5864388.b381b",
+        "type": "ui_group",
+        "name": "Default",
+        "tab": "f82711a.ddc1cf",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "70ef840d.275b1c",
+        "type": "ibmiot",
+        "name": "iotdata",
+        "keepalive": "60",
+        "serverName": "hm0hyb.messaging.internetofthings.ibmcloud.com",
+        "cleansession": true,
+        "appId": "",
+        "shared": false
+    },
+    {
+        "id": "f82711a.ddc1cf",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
